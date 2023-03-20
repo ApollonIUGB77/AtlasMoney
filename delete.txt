@@ -1,0 +1,60 @@
+<?php
+
+// Check if user is logged in
+session_start();
+
+if (!isset($_SESSION['id'])) {
+  header('Location: login.php');
+  exit();
+}
+
+// Connect to database
+$sname = "localhost";
+$usname = "root";
+$password = "";
+$db_name = "atlasmoney";
+
+$conn = new mysqli($sname, $usname, $password, $db_name);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if form is submitted
+if (isset($_POST['delete'])) {
+
+  // Get user ID from session
+  $id = $_SESSION['id'];
+
+  // Delete user account from database
+  $sql = "DELETE FROM atlasin WHERE id = $id";
+
+  if ($conn->query($sql) === TRUE) {
+    // Account deleted successfully
+    session_destroy();
+    header('Location: login.php');
+    exit();
+  } else {
+    // Error deleting account
+    echo "Error deleting account: " . $conn->error;
+  }
+}
+
+$conn->close();
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Delete Account</title>
+</head>
+<body>
+  <h1>Delete Account</h1>
+  <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+  <form method="post">
+    <input type="submit" name="delete" value="Delete Account">
+  </form>
+</body>
+</html>

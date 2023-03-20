@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assistance Page</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 20px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		h1 {
+			margin: 0;
+			font-size: 36px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+		form {
+			width: 60%;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+			padding: 20px;
+			border-radius: 5px;
+			background-color: #f2f2f2;
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 18px;
+			font-weight: bold;
+		}
+		input[type="text"],
+		input[type="tel"],
+		textarea {
+			width: 98%;
+			padding: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 20px;
+			resize: none;
+		}
+		input[type="submit"] {
+			background-color: #333;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			font-weight: bold;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		input[type="submit"]:hover {
+			background-color: #0ce631;
+		}
+		input[type="button"] {
+			background-color: #333;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			font-weight: bold;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		input[type="button"]:hover {
+			background-color: #0ce631;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Assistance Page</h1>
+	</header>
+    <form method="POST" action="Assistance1.php">
+
+		<label for="date">Date :</label>
+		<input type="date" id="date" name="date" required> <br> <br>
+
+		<label for="issue">Issue Encountered :</label>
+		<textarea id="issue" name="issue" rows="5" required></textarea>
+
+		<label for="expectation">Expectation :</label>
+		<textarea id="expectation" name="expectation" rows="5" required></textarea>
+
+		<input type="submit" value="Submit">
+		<input type="button" value="Back" onclick="window.location.href='atlasmoney.php'">
+	</form>
+</body>
+</html>

@@ -1,0 +1,191 @@
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #f2f2f2;
+}
+
+/* Header styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-side h1 {
+  font-size: 32px;
+  margin: 0;
+}
+.left-side h1 {
+  font-size: 32px;
+  margin: 0;
+  opacity: 0;
+  animation: wordAppear 1s ease forwards, fadeIn 0.5s ease 1s forwards;
+}
+
+@keyframes wordAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.left-side p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.left-side p::after {
+  content: " is online";
+  animation: typing 1s steps(8) 1s forwards;
+}
+
+.right-side a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 10px;
+
+}
+a{
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+/* Balance section styles */
+.balance-section {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.balance-section h2 {
+  font-size: 28px;
+  margin-top: 0;
+}
+
+.amount {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+#toggle-balance {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Transactions section styles */
+.transactions-section {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.transactions-section h2 {
+  font-size: 28px;
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+table td {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.transactions-section a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+/* Send money button styles */
+.send-money-button {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.send-money-button a {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.send-money-button a:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Animation styles */
+@keyframes typing {
+  from {
+    content: "";
+  }
+  to {
+    content: " is online";
+  }
+}
+
+@keyframes wordAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
