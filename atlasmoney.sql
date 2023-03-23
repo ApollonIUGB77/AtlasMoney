@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 21 mars 2023 à 19:10
+-- Généré le : jeu. 23 mars 2023 à 11:39
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -54,8 +54,8 @@ CREATE TABLE `atlasin` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` text NOT NULL,
   `email` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `password` varchar(12) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `password` int(4) NOT NULL,
   `balance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,11 +64,11 @@ CREATE TABLE `atlasin` (
 --
 
 INSERT INTO `atlasin` (`id`, `name`, `email`, `phone`, `password`, `balance`) VALUES
-(2, 'Meite', 'aboubacarmeite12@gmail.com', '0789777163', '12345678', 15300000),
-(3, 'Paul', 'aboubacarmeite11@gmail.com', '0789777164', '12345678', 1650000),
-(4, 'Mohamed', 'Mohamed12@gmail.com', '0707071766', '12345678', 60000),
-(7, 'christopher', 'christopher1@gmal.com', '0101020203', '12345678', 885000),
-(8, 'lydie', 'lydie12@gmail.com', '0707793612', '12345678', 215000);
+(2, 'Meite', 'aboubacarmeite12@gmail.com', '0789777163', 1234, 15299800),
+(3, 'Paul', 'aboubacarmeite11@gmail.com', '0789777164', 1234, 1650000),
+(4, 'Mohamed', 'Mohamed12@gmail.com', '0707071766', 1234, 60200),
+(7, 'christopher', 'christopher1@gmal.com', '0101020203', 1234, 885000),
+(8, 'lydie', 'lydie12@gmail.com', '0707793612', 1234, 215000);
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,10 @@ INSERT INTO `transaction` (`transaction_id`, `sender`, `receiver`, `timestamp`, 
 (20, '2', '7', '2023-03-07 11:45:41', 250000),
 (21, '2', '7', '2023-03-07 11:45:58', 500000),
 (22, '7', '3', '2023-03-07 11:46:33', 150000),
-(23, '7', '8', '2023-03-07 11:47:45', 215000);
+(23, '7', '8', '2023-03-07 11:47:45', 215000),
+(24, '2', '2', '2023-03-21 21:54:58', 200),
+(25, '2', '4', '2023-03-21 21:56:13', 200),
+(26, '4', '4', '2023-03-21 21:57:35', 200);
 
 --
 -- Index pour les tables déchargées
@@ -138,13 +141,13 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT pour la table `atlasin`
 --
 ALTER TABLE `atlasin`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

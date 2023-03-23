@@ -23,8 +23,8 @@ if (isset($_POST['reset'])) {
       exit();
     }
   
-    if (strlen($new_password) < 8) {
-      $_SESSION['error'] = "Password must be at least 8 characters long";
+    if (strlen($new_password) < 3) {
+      $_SESSION['error'] = "Password must be 4 characters long";
       header('Location: resetPassword.php');
       exit();
     }
@@ -110,9 +110,9 @@ $conn->close();
       <label for="email">Email:</label>
       <input type="email" name="email" required>
       <label for="new_password">New Password:</label>
-      <input type="password" name="new_password" required>
+      <input type="password" name="new_password" maxlength="4" required>
       <label for="confirm_password">Confirm Password:</label>
-      <input type="password" name="confirm_password" required>
+      <input type="password" name="confirm_password" maxlength="4" required>
       <input type="submit" name="reset" value="Reset Password">
       <input type="button" value="Cancel" onclick="window.location.href='index.php'">
     </form>
