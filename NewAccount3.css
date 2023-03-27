@@ -86,7 +86,11 @@ body {
   
   /* error message styles */
   .error {
-    color: red;
+    border: 1px solid red;
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 10px;
+    margin-bottom: 15px;
     text-align: center;
-    margin-bottom: 10px;
   }
+  

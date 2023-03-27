@@ -13,6 +13,7 @@ $email = "";
 $phone = "";
 
 // retrieve user information
+// retrieve user information
 $sql = "SELECT * FROM atlasin WHERE id='$id'";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) === 1) {
@@ -22,21 +23,30 @@ if (mysqli_num_rows($result) === 1) {
     $phone = $row['phone'];
 }
 
+// check if email or phone is already in use
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_name = mysqli_real_escape_string($conn, $_POST['name']);
     $new_email = mysqli_real_escape_string($conn, $_POST['email']);
     $new_phone = mysqli_real_escape_string($conn, $_POST['phone']);
 
-    // update user information
-    $sql = "UPDATE atlasin SET Name='$new_name', email='$new_email', phone='$new_phone' WHERE id='$id'";
-    if (mysqli_query($conn, $sql)) {
-        $_SESSION['name'] = $new_name;
-        header("Location: atlasmoney.php");
-        exit();
+    // check if new email or phone is already in use
+    $sql = "SELECT * FROM atlasin WHERE (email='$new_email' OR phone='$new_phone') AND id!='$id'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $message = "Email or phone already use.";
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
+        // update user information
+        $sql = "UPDATE atlasin SET Name='$new_name', email='$new_email', phone='$new_phone' WHERE id='$id'";
+        if (mysqli_query($conn, $sql)) {
+            $_SESSION['name'] = $new_name;
+            $message = "Profile updated successfully.";
+            echo "<script>setTimeout(function(){ window.location.href='atlasmoney.php'; }, 3000);</script>";
+        } else {
+            $message = "Error updating record: " . mysqli_error($conn);
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -115,6 +125,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
     <h2>Profile</h2>
+    <?php if (!empty($message)) { ?>
+    <p><?php echo $message; ?></p>
+<?php } ?>
+
     </header>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label for="name"> <b> Old Name :  <?php echo $name; ?> </b> <br>New Name : </label>
@@ -131,6 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <p><a href="delete.php">Delete account</a></p>
         <p><a href="ResetPassword.php">Change password</a></p>
+      
     </form>
 </body>
-</html>§
+</html>

@@ -20,7 +20,7 @@
                     <input type="text" name="phone" placeholder="Please enter your phone number">
                     <P>Password </P>
                     <input type="password" name="password" maxlength="4" placeholder="Enter your ( 4 ) digit password"> <br>
-                    <p> <a href="register.html"> Create a new account ? </a> </p> <br>
+                    <p> <a href="register.php"> Create a new account ? </a> </p> <br>
                     <p> <a href="forgetPassword.php"> Forget password ? </a> </p> <br>
                     <div class="flex-parent jc-center">
                     <button type="submit" class="button button1"> CONNECT </button>

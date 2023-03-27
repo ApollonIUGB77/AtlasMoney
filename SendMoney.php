@@ -47,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO transaction (sender, receiver, amount) VALUES ('$id', '$recipient_id', '$amount')";
             if (mysqli_query($conn, $sql)) {
                 $success = "Transaction successful!";
+                header("Refresh: 3; url=atlasmoney.php");
+
             } else {
                 $error = "Transaction failed due to technical issue. Please try again later.";
             }

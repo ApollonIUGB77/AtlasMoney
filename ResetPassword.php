@@ -20,8 +20,14 @@ if ($conn->connect_error) {
 if (isset($_POST['reset'])) {
 
   $id = $_SESSION['id'];
+  $old_password = $_POST['old_password'];
   $new_password = $_POST['new_password'];
   $confirm_password = $_POST['confirm_password'];
+
+  $sql = "SELECT password FROM atlasin WHERE id = $id";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $stored_password = $row['password'];
 
   if ($new_password !== $confirm_password) {
     $_SESSION['error'] = "Passwords do not match";
@@ -29,8 +35,14 @@ if (isset($_POST['reset'])) {
     exit();
   }
 
-  if (strlen($new_password) < 3) {
-    $_SESSION['error'] = "Password must be 4 characters long";
+  if (strlen($new_password) < 4) {
+    $_SESSION['error'] = "Password must be at least 4 characters long";
+    header('Location: resetPassword.php');
+    exit();
+  }
+
+  if ($stored_password !== $old_password) {
+    $_SESSION['error'] = "Old password is incorrect";
     header('Location: resetPassword.php');
     exit();
   }
@@ -38,9 +50,8 @@ if (isset($_POST['reset'])) {
   $sql = "UPDATE atlasin SET password = '$new_password' WHERE id = $id";
 
   if ($conn->query($sql) === TRUE) {
-    $_SESSION['success'] = "Password reset successfully";
-    header('Location: login.php');
-    exit();
+    $_SESSION['success'] = "Password reset successfully. Redirecting to home page...";
+    header("Refresh: 3; url=atlasmoney.php");
   } else {
     $_SESSION['error'] = "Error updating password: " . $conn->error;
     header('Location: resetPassword.php');
@@ -143,14 +154,22 @@ $conn->close();
       <div style="color: red;"><?php echo $_SESSION['error']; ?></div>
       <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
+    <?php if (isset($_SESSION['success'])): ?>
+  <div style="color: green;"><?php echo $_SESSION['success']; ?></div>
+  <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
     <form method="post">
-      <label for="new_password">New Password:</label>
-      <input type="password" name="new_password" maxlength="4" required> <br>
-      <label for="confirm_password">Confirm Password:</label>
-      <input type="password" name="confirm_password" maxlength="4" required>
-      <input type="submit" name="reset" value="Reset Password">
-      <input type="button" value="Back" onclick="window.location.href='updateProfile.php'">
-    </form>
+  <label for="old_password">Old Password:</label>
+  <input type="password" name="old_password" maxlength="4" required >  <br>
+  <label for="new_password">New Password:</label>
+  <input type="password" name="new_password" maxlength="4" required > <br>
+  <label for="confirm_password">Confirm Password:</label>
+  <input type="password" name="confirm_password" maxlength="4" required>
+  <input type="submit" name="reset" value="Reset Password">
+  <input type="button" value="Back" onclick="window.location.href='updateProfile.php'">
+</form>
+
   </div>
 </body>
 </html>
