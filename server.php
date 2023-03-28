@@ -7,8 +7,6 @@ $name=$_POST['name'];
 $email=$_POST['email'];
 $phone=$_POST['phone'];
 $Pass=$_POST['password'];
-$confirm_pass = $_POST['confirm_password'];
-
 
 $s= "SELECT * FROM atlasin where email='$email' OR phone = '$phone';";
 $result= mysqli_query($con, $s);
@@ -20,13 +18,13 @@ if (mysqli_num_rows($result) > 0) {
     if ($phone == $row['phone']) {
         $error = "phone already exists";
     }
-    if (strlen($password) < 8) {
+    if (strlen($Pass) < 8) {
         $error = "password must be at least 4 digit";
          exit();
     }
     
     // Verify if the two passwords match
-    if ($password != $confirm_pass) {
+    if ($Pass != $confirm_Pass) {
         $error = "PASSWORD mismatch";
                 exit();
     }

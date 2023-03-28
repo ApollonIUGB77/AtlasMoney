@@ -15,7 +15,7 @@ $result_balance = mysqli_query($conn, $sql_balance);
 $balance = mysqli_fetch_assoc($result_balance)['balance'];
 
 // retrieve user transactions
-$sql_transactions = "SELECT t.timestamp, s.name as sender_name, r.name as receiver_name, t.amount
+$sql_transactions = "SELECT t.timestamp, s.name as sender_name,s.phone as sender_phone ,r.name as receiver_name, r.phone as receiver_phone, t.amount
                      FROM transaction t
                      JOIN atlasin s ON t.sender = s.id
                      JOIN atlasin r ON t.receiver = r.id
@@ -98,19 +98,23 @@ $result_transactions = mysqli_query($conn, $sql_transactions);
         <table>
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Sender</th>
-                    <th>Receiver</th>
-                    <th>Amount</th>
+                   <th>Date</th>
+								<th>Sender</th>
+								<th>Sender Phone</th>
+								<th>Receiver</th>
+								<th>Receiver Phone</th>
+								<th>Amount</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result_transactions)): ?>
                     <tr>
-                        <td><?php echo $row['timestamp']; ?></td>
-                        <td><?php echo $row['sender_name']; ?></td>
-                        <td><?php echo $row['receiver_name']; ?></td>
-                        <td><?php echo $row['amount']; ?> FCFA</td>
+                       <td><?php echo $row['timestamp']; ?></td>
+									<td><?php echo $row['sender_name']; ?></td>
+									<td><?php echo $row['sender_phone']; ?></td>
+									<td><?php echo $row['receiver_name']; ?></td>
+									<td><?php echo $row['receiver_phone']; ?></td>
+									<td><?php echo $row['amount']; ?> FCFA</td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
