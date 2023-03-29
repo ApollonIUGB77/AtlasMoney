@@ -15,11 +15,12 @@ $result_balance = mysqli_query($conn, $sql_balance);
 $balance = mysqli_fetch_assoc($result_balance)['balance'];
 
 // retrieve user transactions
-$sql_transactions = "SELECT t.timestamp, s.name as sender_name,s.phone as sender_phone ,r.name as receiver_name, r.phone as receiver_phone, t.amount
+$sql_transactions = "SELECT t.timestamp, s.name as sender_name, s.phone as sender_phone, r.name as receiver_name, r.phone as receiver_phone, (t.amount - t.fees) as amount 
                      FROM transaction t
                      JOIN atlasin s ON t.sender = s.id
                      JOIN atlasin r ON t.receiver = r.id
                      WHERE t.sender='$id' OR t.receiver='$id'";
+
 
 $result_transactions = mysqli_query($conn, $sql_transactions);
 ?>

@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 $id = $_SESSION['id'];
 $name = "";
 $error = "";
-
+$admin_id=1;
 // retrieve user information
 $sql = "SELECT * FROM atlasin WHERE id='$id'";
 $result = mysqli_query($conn, $sql);
@@ -37,18 +37,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $balance = $row['balance'];
         if ($balance >= $amount) {
             // update sender and recipient balances
+            // calculate the fees
+            $fees = $amount * 0.01;
+            
+            // update sender and recipient balances (after deducting the fees)
             $sql = "UPDATE atlasin SET balance=balance-$amount WHERE id='$id'";
             mysqli_query($conn, $sql);
-
-            $sql = "UPDATE atlasin SET balance=balance+$amount WHERE id='$recipient_id'";
+            
+            $sql = "UPDATE atlasin SET balance=balance+($amount-$fees) WHERE id='$recipient_id'";
             mysqli_query($conn, $sql);
-
-            // add transaction record
-            $sql = "INSERT INTO transaction (sender, receiver, amount) VALUES ('$id', '$recipient_id', '$amount')";
+            
+            // credit fees to admin account
+            $sql = "UPDATE atlasin SET balance=balance+$fees WHERE id='$admin_id'";
+            mysqli_query($conn, $sql);
+            
+            // add transaction record (including the fees)
+            $sql = "INSERT INTO transaction (sender, receiver, amount, fees) VALUES ('$id', '$recipient_id', '$amount', '$fees')";
             if (mysqli_query($conn, $sql)) {
                 $success = "Transaction successful!";
                 header("Refresh: 3; url=atlasmoney.php");
-
             } else {
                 $error = "Transaction failed due to technical issue. Please try again later.";
             }
@@ -139,6 +146,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 color: #0077b5;
                 font-size: 16px;
             }
+            .fees{
+                color:red;
+            }
 
             .error {
                 color: red;
@@ -168,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post">
             <label for="phone"> <b> Recipient Phone Number </b></label>
             <input type="text" id="phone" name="phone" required>
-            <label for="amount"><b> Amount </b> </label>
+            <label for="amount"><b> Amount </b> <b class="fees">    ( The fees of 1% will be deducted ) </b1>
             <input type="number" id="amount" name="amount" required>
             <?php if (isset($error)) { ?>
                 <p class="error"><?php echo $error; ?></p>

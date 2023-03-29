@@ -12,7 +12,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
 
 	// Retrieve user's last 3 transactions from the database
 	// Retrieve user's last 3 transactions from the database with sender and receiver names
-	$query = "SELECT t.timestamp, a1.name AS sender_name, a1.phone AS sender_phone, a2.name AS receiver_name, a2.phone AS receiver_phone, t.amount 
+	$query = "SELECT t.timestamp, a1.name AS sender_name, a1.phone AS sender_phone, a2.name AS receiver_name, a2.phone AS receiver_phone,(t.amount - t.fees) as amount 
 	FROM transaction t
 	JOIN atlasin a1 ON t.sender = a1.id
 	JOIN atlasin a2 ON t.receiver = a2.id
