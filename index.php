@@ -17,7 +17,7 @@
                 } ?>
                 <form>
                     <P>Phone Number</P>
-                    <input type="text" name="phone" placeholder="Please enter your phone number">
+                    <input type="text" name="phone" placeholder="Please enter your phone number" maxlength="10">
                     <P>Password </P>
                     <input type="password" name="password" maxlength="4" placeholder="Enter your ( 4 ) digit password"> <br>
                     <p> <a href="register.php"> Create a new account ? </a> </p> <br>
