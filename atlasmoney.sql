@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 23 mars 2023 à 11:39
+-- Généré le : jeu. 20 avr. 2023 à 12:32
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -40,9 +40,7 @@ CREATE TABLE `assistance` (
 --
 
 INSERT INTO `assistance` (`name`, `phone`, `date`, `issue`, `expectation`) VALUES
-('Paul', '0789777164', '2023-02-27 00:00:00', 'very low ', 'i want it to be fast'),
-('christoph', '01010202', '2023-03-02 00:00:00', 'JE VEUX LARGENT', 'JE VEUX LARGENT'),
-('lee', '0789817777', '2023-03-07 00:00:00', 'je suis pauvre', 'je veux largent');
+('pagani', '0707071111', '2023-04-06 00:00:00', 'Money', 'want money');
 
 -- --------------------------------------------------------
 
@@ -64,11 +62,11 @@ CREATE TABLE `atlasin` (
 --
 
 INSERT INTO `atlasin` (`id`, `name`, `email`, `phone`, `password`, `balance`) VALUES
-(2, 'Meite', 'aboubacarmeite12@gmail.com', '0789777163', 1234, 15299800),
-(3, 'Paul', 'aboubacarmeite11@gmail.com', '0789777164', 1234, 1650000),
-(4, 'Mohamed', 'Mohamed12@gmail.com', '0707071766', 1234, 60200),
-(7, 'christopher', 'christopher1@gmal.com', '0101020203', 1234, 885000),
-(8, 'lydie', 'lydie12@gmail.com', '0707793612', 1234, 215000);
+(1, 'Administrator', 'administrator1@gmail.com', '0101010101', 1234, 27890),
+(2, 'Meite', 'aboubacarmeite12@gmail.com', '0789777163', 5678, 1521711679),
+(3, 'Guede', 'Guede12@gmail.com', '0102030205', 1234, 334125),
+(5, 'christopher', 'christopher1@gmal.com', '0707071766', 1234, 1949350),
+(7, 'pagani', 'azerty12@gmail.com', '0707071111', 1234, 0);
 
 -- --------------------------------------------------------
 
@@ -78,43 +76,27 @@ INSERT INTO `atlasin` (`id`, `name`, `email`, `phone`, `password`, `balance`) VA
 
 CREATE TABLE `transaction` (
   `transaction_id` int(11) NOT NULL,
+  `transaction_number` varchar(100) CHARACTER SET armscii8 DEFAULT NULL,
   `sender` varchar(111) NOT NULL,
   `receiver` varchar(111) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `amount` int(11) NOT NULL
+  `amount` int(11) NOT NULL,
+  `fees` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `transaction`
 --
 
-INSERT INTO `transaction` (`transaction_id`, `sender`, `receiver`, `timestamp`, `amount`) VALUES
-(1, '2', '3', '2023-02-25 16:58:03', 1000),
-(2, '2', '3', '2023-02-25 17:07:52', 2000),
-(3, '2', '3', '2023-02-25 17:07:59', 2000),
-(4, '3', '2', '2023-02-25 17:08:58', 1000),
-(5, '3', '2', '2023-02-25 17:09:12', 3000),
-(6, '3', '2', '2023-02-25 17:13:44', 1000),
-(7, '3', '2', '2023-02-25 17:14:14', 1000),
-(8, '3', '2', '2023-02-25 17:14:50', 1000),
-(9, '3', '2', '2023-02-27 15:50:35', 2000),
-(10, '3', '2', '2023-02-27 18:48:27', 1500),
-(11, '2', '4', '2023-02-28 12:34:02', 2500),
-(12, '2', '5', '2023-03-02 15:27:58', 5000),
-(13, '5', '3', '2023-03-02 15:29:14', 2000),
-(14, '5', '4', '2023-03-02 15:36:01', 35000),
-(15, '5', '3', '2023-03-02 15:36:08', 15000),
-(16, '2', '6', '2023-03-07 11:33:18', 100000),
-(17, '2', '5', '2023-03-07 11:34:12', 5000),
-(18, '6', '2', '2023-03-07 11:36:30', 100000),
-(19, '5', '2', '2023-03-07 11:37:36', 10000),
-(20, '2', '7', '2023-03-07 11:45:41', 250000),
-(21, '2', '7', '2023-03-07 11:45:58', 500000),
-(22, '7', '3', '2023-03-07 11:46:33', 150000),
-(23, '7', '8', '2023-03-07 11:47:45', 215000),
-(24, '2', '2', '2023-03-21 21:54:58', 200),
-(25, '2', '4', '2023-03-21 21:56:13', 200),
-(26, '4', '4', '2023-03-21 21:57:35', 200);
+INSERT INTO `transaction` (`transaction_id`, `transaction_number`, `sender`, `receiver`, `timestamp`, `amount`, `fees`) VALUES
+(1, '642e9592bbbe1', '2', '4', '2023-04-06 09:49:06', 25000, '250.00'),
+(2, '642e95a58a651', '2', '5', '2023-04-06 09:49:25', 65000, '650.00'),
+(3, '642e95df100b9', '2', '3', '2023-04-06 09:50:23', 24600, '246.00'),
+(4, '642e960b71fcd', '4', '2', '2023-04-06 09:51:07', 3500, '35.00'),
+(5, '642e966e9ca7c', '4', '3', '2023-04-06 09:52:46', 55400, '554.00'),
+(6, '642e969eb9abf', '5', '2', '2023-04-06 09:53:34', 25000, '250.00'),
+(7, '642e9743b8fa1', '2', '5', '2023-04-06 09:56:19', 1500000, '15000.00'),
+(8, '642ea0aae581b', '5', '2', '2023-04-06 10:36:26', 4500, '45.00');
 
 --
 -- Index pour les tables déchargées
@@ -141,13 +123,13 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT pour la table `atlasin`
 --
 ALTER TABLE `atlasin`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

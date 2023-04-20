@@ -50,9 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // credit fees to admin account
             $sql = "UPDATE atlasin SET balance=balance+$fees WHERE id='$admin_id'";
             mysqli_query($conn, $sql);
-            
+            $transaction_number=uniqid();
             // add transaction record (including the fees)
-            $sql = "INSERT INTO transaction (sender, receiver, amount, fees) VALUES ('$id', '$recipient_id', '$amount', '$fees')";
+            $sql = "INSERT INTO transaction (sender, receiver, amount, fees, transaction_number) VALUES ('$id', '$recipient_id', '$amount', '$fees','$transaction_number')";
             if (mysqli_query($conn, $sql)) {
                 $success = "Transaction successful!";
                 header("Refresh: 3; url=atlasmoney.php");
@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </header>
         <form method="post">
             <label for="phone"> <b> Recipient Phone Number </b></label>
-            <input type="text" id="phone" name="phone" required>
+            <input type="text" id="phone" name="phone" maxlength="10" required>
             <label for="amount"><b> Amount </b> <b class="fees">    ( The fees of 1% will be deducted ) </b1>
             <input type="number" id="amount" name="amount" required>
             <?php if (isset($error)) { ?>

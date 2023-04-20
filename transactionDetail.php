@@ -15,7 +15,9 @@ $result_balance = mysqli_query($conn, $sql_balance);
 $balance = mysqli_fetch_assoc($result_balance)['balance'];
 
 // retrieve user transactions
-$sql_transactions = "SELECT t.timestamp, s.name as sender_name, s.phone as sender_phone, r.name as receiver_name, r.phone as receiver_phone, (t.amount - t.fees) as amount 
+$sql_transactions = "SELECT t.timestamp, s.name as sender_name, s.phone as sender_phone, r.name as receiver_name, r.phone 
+as receiver_phone, (t.amount - t.fees) as amount ,t.transaction_number as trans_id
+                     
                      FROM transaction t
                      JOIN atlasin s ON t.sender = s.id
                      JOIN atlasin r ON t.receiver = r.id
@@ -105,6 +107,7 @@ $result_transactions = mysqli_query($conn, $sql_transactions);
 								<th>Receiver</th>
 								<th>Receiver Phone</th>
 								<th>Amount</th>
+                                <th>Trans_id</th>
                 </tr>
             </thead>
             <tbody>
@@ -115,7 +118,8 @@ $result_transactions = mysqli_query($conn, $sql_transactions);
 									<td><?php echo $row['sender_phone']; ?></td>
 									<td><?php echo $row['receiver_name']; ?></td>
 									<td><?php echo $row['receiver_phone']; ?></td>
-									<td><?php echo $row['amount']; ?> FCFA</td>
+                                    <td><?php echo number_format($row['amount'], 0, '', ','); ?> FCFA</td>
+                                    <td><?php echo $row['trans_id']; ?></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>

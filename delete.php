@@ -32,7 +32,7 @@ if (isset($_POST['delete'])) {
   if ($conn->query($sql) === TRUE) {
     // Account deleted successfully
     session_destroy();
-    header('Location: login.php');
+    header('Location: index.php');
     exit();
   } else {
     // Error deleting account

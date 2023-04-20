@@ -48,7 +48,7 @@
           <br />
         </label>
         <div class="clearfix">
-          <a href="login.php"><button type="button" class="cancelbtn"> Cancel </button></a>
+          <a href="index.php"><button type="button" class="cancelbtn"> Cancel </button></a>
           <button type="submit" class="signupbtn">Sign Up</button>
         </div>
       </div>

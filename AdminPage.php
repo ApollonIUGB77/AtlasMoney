@@ -46,7 +46,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
 	<div class="container">
 				<div class="balance-section">
 					<h2>Your Balance</h2>
-					<p class="amount"> <?php echo $balance; ?> FCFA</p>
+					<p class="amount"> <?php echo number_format($balance, 0, '', ','); ?> FCFA</p>
 					<button id="toggle-balance" onclick="toggleBalance()">Hide Balance</button>
 				</div>
 
@@ -56,7 +56,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
             <table>
                 <thead>
                 <tr>
-                    <th>Date</th>
+                    <th>Date</th> 
                     <th>Sender</th>
                     <th>Sender Phone</th>
                      <th>Fee Amount</th>
@@ -68,7 +68,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
                         <td><?php echo $row['timestamp']; ?></td>
                         <td><?php echo $row['sender_name']; ?></td>
                         <td><?php echo $row['sender_phone']; ?></td>
-                          <td><?php echo $row['fees']; ?> FCFA</td>
+						<td><?php echo number_format($row['fees'], 0, '', ','); ?> FCFA</td>
+
                     </tr>
                 <?php } ?>
                 </tbody>

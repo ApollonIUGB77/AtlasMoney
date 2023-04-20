@@ -111,7 +111,7 @@ $result_transactions = mysqli_query($conn, $sql_transactions);
                        <td><?php echo $row['timestamp']; ?></td>
                         <td><?php echo $row['sender_name']; ?></td>
                         <td><?php echo $row['sender_phone']; ?></td>
-                          <td><?php echo $row['fees']; ?> FCFA</td>
+						<td><?php echo number_format($row['fees'], 0, '', ','); ?> FCFA</td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>

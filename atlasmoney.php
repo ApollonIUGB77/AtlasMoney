@@ -12,7 +12,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
 
 	// Retrieve user's last 3 transactions from the database
 	// Retrieve user's last 3 transactions from the database with sender and receiver names
-	$query = "SELECT t.timestamp, a1.name AS sender_name, a1.phone AS sender_phone, a2.name AS receiver_name, a2.phone AS receiver_phone,(t.amount - t.fees) as amount 
+	$query = "SELECT t.timestamp, a1.name AS sender_name, a1.phone AS sender_phone, a2.name AS receiver_name, a2.phone AS receiver_phone,(t.amount - t.fees) as amount , t.transaction_number as trans_id
 	FROM transaction t
 	JOIN atlasin a1 ON t.sender = a1.id
 	JOIN atlasin a2 ON t.receiver = a2.id
@@ -53,7 +53,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
 			<div class="container">
 				<div class="balance-section">
 					<h2>Your Balance</h2>
-					<p class="amount"> <?php echo $balance; ?> FCFA</p>
+					<p class="amount"> <?php echo number_format($balance, 0, '', ','); ?> FCFA</p>
 					<button id="toggle-balance" onclick="toggleBalance()">Hide Balance</button>
 				</div>
 
@@ -69,6 +69,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
 								<th>Receiver</th>
 								<th>Receiver Phone</th>
 								<th>Amount</th>
+								<th>Trans_id</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -79,7 +80,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['phone'])) {
 									<td><?php echo $row['sender_phone']; ?></td>
 									<td><?php echo $row['receiver_name']; ?></td>
 									<td><?php echo $row['receiver_phone']; ?></td>
-									<td><?php echo $row['amount']; ?> FCFA</td>
+									<td><?php echo number_format($row['amount'], 0, '', ','); ?> FCFA</td>
+									<td><?php echo $row['trans_id']; ?></td>
+                    </tr>
 								</tr>
 							<?php } ?>
 						</tbody>

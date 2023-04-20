@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="email" name="email" value="">
 
         <label for="phone"><b> Old Phone: <?php echo $phone; ?></b><br>New Phone : </label>
-        <input type="text" id="phone" name="phone" value="">
+        <input type="text" id="phone" name="phone" value="" maxlength="10">
 
         <input type="submit" name="submit" value="Update"> <br> <br>
         <input type="button" value="Back" onclick="window.location.href='atlasmoney.php'">
